@@ -54,7 +54,20 @@ public class ListComprehension {
         dept.add(d1);dept.add(d2);dept.add(d3);dept.add(d4);dept.add(d5);dept.add(d6);dept.add(d7);dept.add(d8);dept.add(d9);
         dept.add(d10);dept.add(d11);dept.add(d12);dept.add(d13);
         dept.stream()
-                .forEach(e -> { System.out.println(e); });
+                .forEach(e -> { System.out.println(dept.indexOf(e)); });
+
+        //Code for 1st SQL stuff
+        System.out.println("\n1) Select * from emp\n");
+        emp.stream().forEach(e -> { System.out.println(e); });
+
+        /*
+        System.out.println("Only print index == 1");
+        emp.stream()
+                .filter(e -> e.get(1) == "MARTIN")
+                .forEach(e -> { System.out.println(e.get(1)+", "+e.get(2)); });
+        */
+
+
 
     }
 }
