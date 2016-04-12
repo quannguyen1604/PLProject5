@@ -1,0 +1,221 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> column
+Rule 2     start -> data
+Rule 3     column -> COLUMN
+Rule 4     data -> INTEGER - INTEGER - INTEGER , float , float , float , float , INTEGER , float
+Rule 5     float -> INTEGER . INTEGER
+
+Terminals, with rules where they appear
+
+,                    : 4 4 4 4 4 4
+-                    : 4 4
+.                    : 5
+COLUMN               : 3
+INTEGER              : 4 4 4 4 5 5
+error                : 
+
+Nonterminals, with rules where they appear
+
+column               : 1
+data                 : 2
+float                : 4 4 4 4 4
+start                : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . column
+    (2) start -> . data
+    (3) column -> . COLUMN
+    (4) data -> . INTEGER - INTEGER - INTEGER , float , float , float , float , INTEGER , float
+
+    COLUMN          shift and go to state 2
+    INTEGER         shift and go to state 4
+
+    column                         shift and go to state 1
+    start                          shift and go to state 3
+    data                           shift and go to state 5
+
+state 1
+
+    (1) start -> column .
+
+    $end            reduce using rule 1 (start -> column .)
+
+
+state 2
+
+    (3) column -> COLUMN .
+
+    $end            reduce using rule 3 (column -> COLUMN .)
+
+
+state 3
+
+    (0) S' -> start .
+
+
+
+state 4
+
+    (4) data -> INTEGER . - INTEGER - INTEGER , float , float , float , float , INTEGER , float
+
+    -               shift and go to state 6
+
+
+state 5
+
+    (2) start -> data .
+
+    $end            reduce using rule 2 (start -> data .)
+
+
+state 6
+
+    (4) data -> INTEGER - . INTEGER - INTEGER , float , float , float , float , INTEGER , float
+
+    INTEGER         shift and go to state 7
+
+
+state 7
+
+    (4) data -> INTEGER - INTEGER . - INTEGER , float , float , float , float , INTEGER , float
+
+    -               shift and go to state 8
+
+
+state 8
+
+    (4) data -> INTEGER - INTEGER - . INTEGER , float , float , float , float , INTEGER , float
+
+    INTEGER         shift and go to state 9
+
+
+state 9
+
+    (4) data -> INTEGER - INTEGER - INTEGER . , float , float , float , float , INTEGER , float
+
+    ,               shift and go to state 10
+
+
+state 10
+
+    (4) data -> INTEGER - INTEGER - INTEGER , . float , float , float , float , INTEGER , float
+    (5) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 11
+
+    float                          shift and go to state 12
+
+state 11
+
+    (5) float -> INTEGER . . INTEGER
+
+    .               shift and go to state 13
+
+
+state 12
+
+    (4) data -> INTEGER - INTEGER - INTEGER , float . , float , float , float , INTEGER , float
+
+    ,               shift and go to state 14
+
+
+state 13
+
+    (5) float -> INTEGER . . INTEGER
+
+    INTEGER         shift and go to state 15
+
+
+state 14
+
+    (4) data -> INTEGER - INTEGER - INTEGER , float , . float , float , float , INTEGER , float
+    (5) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 11
+
+    float                          shift and go to state 16
+
+state 15
+
+    (5) float -> INTEGER . INTEGER .
+
+    ,               reduce using rule 5 (float -> INTEGER . INTEGER .)
+    $end            reduce using rule 5 (float -> INTEGER . INTEGER .)
+
+
+state 16
+
+    (4) data -> INTEGER - INTEGER - INTEGER , float , float . , float , float , INTEGER , float
+
+    ,               shift and go to state 17
+
+
+state 17
+
+    (4) data -> INTEGER - INTEGER - INTEGER , float , float , . float , float , INTEGER , float
+    (5) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 11
+
+    float                          shift and go to state 18
+
+state 18
+
+    (4) data -> INTEGER - INTEGER - INTEGER , float , float , float . , float , INTEGER , float
+
+    ,               shift and go to state 19
+
+
+state 19
+
+    (4) data -> INTEGER - INTEGER - INTEGER , float , float , float , . float , INTEGER , float
+    (5) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 11
+
+    float                          shift and go to state 20
+
+state 20
+
+    (4) data -> INTEGER - INTEGER - INTEGER , float , float , float , float . , INTEGER , float
+
+    ,               shift and go to state 21
+
+
+state 21
+
+    (4) data -> INTEGER - INTEGER - INTEGER , float , float , float , float , . INTEGER , float
+
+    INTEGER         shift and go to state 22
+
+
+state 22
+
+    (4) data -> INTEGER - INTEGER - INTEGER , float , float , float , float , INTEGER . , float
+
+    ,               shift and go to state 23
+
+
+state 23
+
+    (4) data -> INTEGER - INTEGER - INTEGER , float , float , float , float , INTEGER , . float
+    (5) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 11
+
+    float                          shift and go to state 24
+
+state 24
+
+    (4) data -> INTEGER - INTEGER - INTEGER , float , float , float , float , INTEGER , float .
+
+    $end            reduce using rule 4 (data -> INTEGER - INTEGER - INTEGER , float , float , float , float , INTEGER , float .)
+
