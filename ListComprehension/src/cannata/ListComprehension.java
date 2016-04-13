@@ -1,6 +1,7 @@
 package cannata;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ListComprehension {
     public static void main(String[] args) {
@@ -60,14 +61,16 @@ public class ListComprehension {
         System.out.println("\n1) Select * from emp\n");
         emp.stream().forEach(e -> { System.out.println(e); });
 
-        /*
-        System.out.println("Only print index == 1");
+        //Code for 3rd SQL stuff
+        ArrayList<Object> T = new ArrayList<Object>();
+        System.out.println("\n3) select last_`name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 ");
         emp.stream()
-                .filter(e -> e.get(1) == "MARTIN")
-                .forEach(e -> { System.out.println(e.get(1)+", "+e.get(2)); });
-        */
+                .filter(e -> emp.indexOf(e) > 0)
+                .filter(e -> (Integer)e.get(7) > 1500 &&
+                        (Integer)e.get(9) > 40)
+                .forEach(e -> { System.out.println(e.get(1)+", "+e.get(2)+", "+e.get(6) + ", " + e.get(7)); } );
 
-
+        
 
     }
 }
