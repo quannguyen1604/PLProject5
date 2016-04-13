@@ -62,7 +62,6 @@ public class ListComprehension {
         emp.stream().forEach(e -> { System.out.println(e); });
 
         //Code for 3rd SQL stuff
-        ArrayList<Object> T = new ArrayList<Object>();
         System.out.println("\n3) select last_`name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 ");
         emp.stream()
                 .filter(e -> emp.indexOf(e) > 0)
@@ -70,7 +69,16 @@ public class ListComprehension {
                         (Integer)e.get(9) > 40)
                 .forEach(e -> { System.out.println(e.get(1)+", "+e.get(2)+", "+e.get(6) + ", " + e.get(7)); } );
 
-        
+        //Code for 4th SQL stuff
+        System.out.println("\n4) select last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 order by last_name: ");
+        emp.stream()
+                .filter(e -> emp.indexOf(e) > 0 &&
+                        (Integer)e.get(7) > 1500 &&
+                        (Integer)e.get(9) > 40)
+                .sorted((e, a) -> ((String)e.get(1)).compareTo((String)a.get(1))) //Must use e and a, NOT e1 and e2!!!
+                .forEach(e -> { System.out.println(e.get(1)+", "+e.get(2)+", "+e.get(6) + ", " + e.get(7)); } );
+
+
 
     }
 }
