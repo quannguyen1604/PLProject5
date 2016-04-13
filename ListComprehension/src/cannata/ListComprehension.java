@@ -57,12 +57,17 @@ public class ListComprehension {
         dept.stream()
                 .forEach(e -> { System.out.println(dept.indexOf(e)); });
 
-        //Code for 1st SQL stuff
+        //Code for 1st SQL statement
         System.out.println("\n1) Select * from emp\n");
         emp.stream().forEach(e -> { System.out.println(e); });
 
+        //Code for 2nd SQL statement
+        System.out.println("\n2) Select first_name, last_name, title, salary from emp\n");
+        emp.stream().filter(e -> emp.indexOf(e) > 0).forEach(e -> { System.out.println(e.get(2)+ " " + e.get(1) + " " + e.get(6) +" "+ e.get(7)); });
+
+
         //Code for 3rd SQL stuff
-        System.out.println("\n3) select last_`name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 ");
+        System.out.println("\n3) select last_`name, first_name, title, salary from emp where salary > 1500 and dept_id > 40 ");
         emp.stream()
                 .filter(e -> emp.indexOf(e) > 0)
                 .filter(e -> (Integer)e.get(7) > 1500 &&
@@ -70,14 +75,13 @@ public class ListComprehension {
                 .forEach(e -> { System.out.println(e.get(1)+", "+e.get(2)+", "+e.get(6) + ", " + e.get(7)); } );
 
         //Code for 4th SQL stuff
-        System.out.println("\n4) select last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 order by last_name: ");
+        System.out.println("\n4) select last_name, first_name, title, salary from emp where salary > 1500 and dept_id > 40 order by last_name: ");
         emp.stream()
                 .filter(e -> emp.indexOf(e) > 0 &&
                         (Integer)e.get(7) > 1500 &&
                         (Integer)e.get(9) > 40)
                 .sorted((e, a) -> ((String)e.get(1)).compareTo((String)a.get(1))) //Must use e and a, NOT e1 and e2!!!
                 .forEach(e -> { System.out.println(e.get(1)+", "+e.get(2)+", "+e.get(6) + ", " + e.get(7)); } );
-
 
 
     }
