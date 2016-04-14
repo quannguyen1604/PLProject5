@@ -29,6 +29,7 @@
     <jar jarfile="${dist}/lib/Main-${DSTAMP}.jar" basedir="${build}">
             <manifest>
                 <attribute name="Main-Class" value="cannata.ListComprehension"/>
+                <attribute name="Class" value="cannata.Tuple2"/>
             </manifest>
     </jar>
   </target>

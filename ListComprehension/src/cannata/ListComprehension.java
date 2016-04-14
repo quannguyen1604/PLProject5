@@ -1,7 +1,10 @@
 package cannata;
 
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.function.*;
+import java.util.stream.*;
+import cannata.Tuple2;
+//import static org.jooq.lambda.tuple;
 
 public class ListComprehension {
     public static void main(String[] args) {
@@ -83,6 +86,20 @@ public class ListComprehension {
                 .sorted((e, a) -> ((String)e.get(1)).compareTo((String)a.get(1))) //Must use e and a, NOT e1 and e2!!!
                 .forEach(e -> { System.out.println(e.get(1)+", "+e.get(2)+", "+e.get(6) + ", " + e.get(7)); } );
 
+        System.out.println("\n5) select distinct last_name, title, salary, name from s_emp order by salary where salaray < 1400");
+        emp.stream()
+                .filter(e-> emp.indexOf(e) > 0 &&
+                       (Integer)e.get(7) < 1700)
+                .sorted((e, a) -> ((Integer)e.get(7)).compareTo((Integer)a.get(7)))
+                .distinct()
+                .forEach(e -> { System.out.println(e.get(1)+", "+e.get(6)+", "+e.get(7)); } );
 
+        /*
+        emp.stream()
+                .flatMap(v1 -> dept.stream()
+                        .map(v2 -> tuple(v1, v2)))
+                .filter(t -> Objects.equals(t.v1, t.v2))
+                .forEach(System.out::println);
+        */
     }
 }
