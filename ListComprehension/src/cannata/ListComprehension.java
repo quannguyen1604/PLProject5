@@ -38,8 +38,7 @@ public class ListComprehension {
         emp.add(e1);emp.add(e2);emp.add(e3);emp.add(e4);emp.add(e5);emp.add(e6);emp.add(e7);emp.add(e8);emp.add(e9);emp.add(e10);
         emp.add(e11);emp.add(e12);emp.add(e13);emp.add(e14);emp.add(e15);emp.add(e16);emp.add(e17);emp.add(e18);emp.add(e19);
         emp.add(e20);emp.add(e21);emp.add(e22);emp.add(e23);emp.add(e24);emp.add(e25);emp.add(e26);
-        emp.stream()
-                .forEach(e -> { System.out.println(e); });
+
 
         ArrayList<List<Object>> dept = new ArrayList<List<Object>>();
         List<Object> d1 = Arrays.asList("ID","NAME","REGION_ID");
@@ -57,8 +56,7 @@ public class ListComprehension {
         List<Object> d13 = Arrays.asList(50,"Administration",1);
         dept.add(d1);dept.add(d2);dept.add(d3);dept.add(d4);dept.add(d5);dept.add(d6);dept.add(d7);dept.add(d8);dept.add(d9);
         dept.add(d10);dept.add(d11);dept.add(d12);dept.add(d13);
-        dept.stream()
-                .forEach(e -> { System.out.println(dept.indexOf(e)); });
+
 
         //Code for 1st SQL statement
         System.out.println("\n1) Select * from emp\n");
@@ -66,33 +64,39 @@ public class ListComprehension {
 
         //Code for 2nd SQL statement
         System.out.println("\n2) Select first_name, last_name, title, salary from emp\n");
-        emp.stream().filter(e -> emp.indexOf(e) > 0).forEach(e -> { System.out.println(e.get(2)+ " " + e.get(1) + " " + e.get(6) +" "+ e.get(7)); });
-
+        emp.stream()
+                .filter(e -> emp.indexOf(e) > 0)   //Skip the 1st title list
+                .map(e -> e.get(2)+ " " + e.get(1) + " " + e.get(6) +" "+ e.get(7))
+                .forEach(e -> { System.out.println(e); });
 
         //Code for 3rd SQL stuff
-        System.out.println("\n3) select last_`name, first_name, title, salary from emp where salary > 1500 and dept_id > 40 ");
+        System.out.println("\n3) select last_name, first_name, title, salary from emp where salary > 1500 and dept_id > 40\n");
         emp.stream()
-                .filter(e -> emp.indexOf(e) > 0)
-                .filter(e -> (Integer)e.get(7) > 1500 &&
+                .filter(e -> emp.indexOf(e) > 0 &&
+                        (Integer)e.get(7) > 1500 &&
                         (Integer)e.get(9) > 40)
-                .forEach(e -> { System.out.println(e.get(1)+", "+e.get(2)+", "+e.get(6) + ", " + e.get(7)); } );
+                .map(e -> e.get(1)+", "+e.get(2)+", "+e.get(6) + ", " + e.get(7))
+                .forEach(e -> { System.out.println(e); } );
 
         //Code for 4th SQL stuff
-        System.out.println("\n4) select last_name, first_name, title, salary from emp where salary > 1500 and dept_id > 40 order by last_name: ");
+        System.out.println("\n4) select last_name, first_name, title, salary from emp where salary > 1500 and dept_id > 40 order by last_name:\n");
         emp.stream()
                 .filter(e -> emp.indexOf(e) > 0 &&
                         (Integer)e.get(7) > 1500 &&
                         (Integer)e.get(9) > 40)
                 .sorted((e, a) -> ((String)e.get(1)).compareTo((String)a.get(1))) //Must use e and a, NOT e1 and e2!!!
-                .forEach(e -> { System.out.println(e.get(1)+", "+e.get(2)+", "+e.get(6) + ", " + e.get(7)); } );
+                .map(e -> e.get(1)+", "+e.get(2)+", "+e.get(6) + ", " + e.get(7))
+                .forEach(e -> { System.out.println(e); } );
 
-        System.out.println("\n5) select distinct last_name, title, salary, name from s_emp order by salary where salaray < 1400");
+        //Code for 5th SQL stuff
+        System.out.println("\n5) select distinct last_name, title, salary, name from s_emp order by salary desc where title = STOCK CLERK\n");
         emp.stream()
                 .filter(e-> emp.indexOf(e) > 0 &&
-                       (Integer)e.get(7) < 1700)
-                .sorted((e, a) -> ((Integer)e.get(7)).compareTo((Integer)a.get(7)))
+                       e.get(6) == "STOCK CLERK")
+                .sorted((a, e) -> ((Integer)e.get(7)).compareTo((Integer)a.get(7)))
                 .distinct()
-                .forEach(e -> { System.out.println(e.get(1)+", "+e.get(6)+", "+e.get(7)); } );
+                .map(e -> e.get(1)+", "+e.get(6)+", "+e.get(7))
+                .forEach(e -> { System.out.println(e); } );
 
         /*
         emp.stream()
